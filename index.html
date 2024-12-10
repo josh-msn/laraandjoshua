@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J+L forever</title>
+    <style>
+        /* Allgemeine Stile für die Seite */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #2c2c2c; /* Dunkelgrauer Hintergrund */
+            height: 100vh;
+            overflow: hidden; /* Verhindert Scrollen durch fallende Herzen */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            position: relative; /* Positionierungskontext für fallende Herzen */
+        }
+
+        /* Herz-Container mit SVG */
+        .heart-container {
+            position: relative;
+            width: 400px; /* Anpassbare Breite */
+            height: 370px; /* Anpassbare Höhe */
+            animation: heartbeat 2s infinite; /* Herzschlag-Animation */
+        }
+
+        /* Anpassung für das SVG-Image */
+        .heart-container img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* Herz-Inhalt (Text) */
+        .heart-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 36px; /* Größere Schriftgröße */
+            font-weight: bold;
+            text-align: center;
+            pointer-events: none; /* Text bleibt interaktiv */
+            line-height: 1.2; /* Zeilenhöhe für bessere Lesbarkeit */
+        }
+
+        /* Animation für das Pochen des Herzens */
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+            20% {
+                transform: scale(1.06);
+            }
+            40% {
+                transform: scale(1);
+            }
+            60% {
+                transform: scale(1.06);
+            }
+            80% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Fallende Herzen */
+        .falling-heart {
+            position: absolute;
+            top: -50px; /* Start oberhalb des Bildschirms */
+            width: 20px;
+            height: 20px;
+            background: #ff69b4; /* Rosa Farbe */
+            transform: rotate(-45deg);
+            animation: fall linear infinite;
+            opacity: 0.8;
+            will-change: transform; /* Optimierung der Animation */
+        }
+
+        /* Formen der fallenden Herzen */
+        .falling-heart::before,
+        .falling-heart::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff69b4;
+            border-radius: 50%;
+        }
+
+        .falling-heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .falling-heart::after {
+            left: 10px;
+            top: 0;
+        }
+
+        /* Animation für fallende Herzen */
+        @keyframes fall {
+            0% {
+                transform: translateY(0) translateX(0) rotate(-45deg);
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) translateX(50px) rotate(-45deg);
+                opacity: 0.8;
+            }
+        }
+
+        /* Generierung mehrerer fallender Herzen mit unterschiedlichen Eigenschaften */
+        /* Korrigierte Selektoren: Verwendung von nth-of-type anstelle von nth-child */
+        .falling-hearts .falling-heart:nth-of-type(1) {
+            left: 5vw;
+            animation-duration: 7s;
+            animation-delay: 0s;
+            transform: rotate(-45deg) scale(1);
+            opacity: 0.7;
+        }
+
+        .falling-hearts .falling-heart:nth-of-type(2) {
+            left: 15vw;
+            animation-duration: 8s;
+            animation-delay: 1s;
+            transform: rotate(-45deg) scale(1.2);
+            opacity: 0.9;
+        }
+
+        .falling-hearts .falling-heart:nth-of-type(3) {
+            left: 25vw;
+            animation-duration: 6s;
+            animation-delay: 2s;
+            transform: rotate(-45deg) scale(0.8);
+            opacity: 0.6;
+        }
+
+        .falling-hearts .falling-heart:nth-of-type(4) {
+            left: 35vw;
+            animation-duration: 9s;
+            animation-delay: 3s;
+            transform: rotate(-45deg) scale(1.1);
+            opacity: 0.85;
+        }
+
+        .falling-hearts .falling-heart:nth-of-type(5) {
+            left: 45vw;
+            animation-duration: 5s;
+            animation-delay: 4s;
+            transform: rotate(-45deg) scale(0.9);
+            opacity: 0.75;
+        }
+
+        .falling-hearts .falling-heart:nth-of-type(6) {
+            left: 55vw;
+            animation-duration: 7.5s;
+            animation-delay: 5s;
+            transform: rotate(-45deg) scale(1.3);
+            opacity: 0.8;
+        }
+
+        .falling-hearts .falling-heart:nth-of-type(7) {
+            left: 65vw;
+            animation-duration: 6.5s;
+            animation-delay: 6s;
+            transform: rotate(-45deg) scale(0.7);
+            opacity: 0.65;
+        }
+
+        .falling-hearts .falling-heart:nth-of-type(8) {
+            left: 75vw;
+            animation-duration: 8.5s;
+            animation-delay: 7s;
+            transform: rotate(-45deg) scale(1.0);
+            opacity: 0.9;
+        }
+
+        .falling-hearts .falling-heart:nth-of-type(9) {
+            left: 85vw;
+            animation-duration: 5.5s;
+            animation-delay: 8s;
+            transform: rotate(-45deg) scale(1.4);
+            opacity: 0.7;
+        }
+
+        .falling-hearts .falling-heart:nth-of-type(10) {
+            left: 95vw;
+            animation-duration: 9.5s;
+            animation-delay: 9s;
+            transform: rotate(-45deg) scale(0.85);
+            opacity: 0.8;
+        }
+
+        /* Wiederhole die Eigenschaften für die nächsten 10 Herzen */
+        .falling-hearts .falling-heart:nth-of-type(11) {
+            left: 10vw;
+            animation-duration: 6.2s;
+            animation-delay: 1.5s;
+            transform: rotate(-45deg) scale(1.1);
+            opacity: 0.75;
+        }
+
+        .falling-hearts .falling-heart:nth-of-type(12) {
+            left: 20vw;
+            animation-duration: 7.8s;
+            animation-delay: 2.5s;
+            transform: rotate(-45deg) scale(0.95);
+            opacity: 0.85;
+        }
+
+        .falling-hearts .falling-heart:nth-of-type(13) {
+            left: 30vw;
+            animation-duration: 5.3s;
+            animation-delay: 3.5s;
+            transform: rotate(-45deg) scale(1.0);
+            opacity: 0.7;
+        }
+
+        .falling-hearts .falling-heart:nth-of-type(14) {
+            left: 40vw;
+            animation-duration: 8.1s;
+            animation-delay: 4.5s;
+            transform: rotate(-45deg) scale(1.25);
+            opacity: 0.9;
+        }
+
+        .falling-hearts .falling-heart:nth-of-type(15) {
+            left: 50vw;
+            animation-duration: 6.7s;
+            animation-delay: 5.5s;
+            transform: rotate(-45deg) scale(0.85);
+            opacity: 0.65;
+        }
+
+        .falling-hearts .falling-heart:nth-of-type(16) {
+            left: 60vw;
+            animation-duration: 7.3s;
+            animation-delay: 6.5s;
+            transform: rotate(-45deg) scale(1.3);
+            opacity: 0.8;
+        }
+
+        .falling-hearts .falling-heart:nth-of-type(17) {
+            left: 70vw;
+            animation-duration: 5.8s;
+            animation-delay: 7.5s;
+            transform: rotate(-45deg) scale(0.9);
+            opacity: 0.75;
+        }
+
+        .falling-hearts .falling-heart:nth-of-type(18) {
+            left: 80vw;
+            animation-duration: 9.2s;
+            animation-delay: 8.5s;
+            transform: rotate(-45deg) scale(1.2);
+            opacity: 0.85;
+        }
+
+        .falling-hearts .falling-heart:nth-of-type(19) {
+            left: 90vw;
+            animation-duration: 6.9s;
+            animation-delay: 9.5s;
+            transform: rotate(-45deg) scale(0.8);
+            opacity: 0.7;
+        }
+
+        .falling-hearts .falling-heart:nth-of-type(20) {
+            left: 100vw;
+            animation-duration: 8.7s;
+            animation-delay: 10.5s;
+            transform: rotate(-45deg) scale(1.0);
+            opacity: 0.9;
+        }
+
+        /* Container für fallende Herzen zur besseren Strukturierung */
+        .falling-hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Verhindert Interaktion mit den fallenden Herzen */
+        }
+
+        /* Responsive Anpassung */
+        @media (max-width: 600px) {
+            .heart-container {
+                width: 300px; /* Anpassung für kleinere Bildschirme */
+                height: 280px;
+                animation: heartbeat 2s infinite; /* Herzschlag-Animation bleibt gleich */
+            }
+
+            .heart-text {
+                font-size: 24px;
+            }
+
+            .falling-heart {
+                width: 15px;
+                height: 15px;
+            }
+
+            .falling-heart::before,
+            .falling-heart::after {
+                width: 15px;
+                height: 15px;
+            }
+
+            /* Anpassung der fallenden Herzen */
+            .falling-hearts .falling-heart:nth-of-type(1) {
+                animation-duration: 5.6s; /* 7s * 0.8 */
+                animation-delay: 0s;
+                transform: rotate(-45deg) scale(0.75);
+            }
+
+            .falling-hearts .falling-heart:nth-of-type(2) {
+                animation-duration: 6.4s; /* 8s * 0.8 */
+                animation-delay: 0.8s; /* 1s * 0.8 */
+                transform: rotate(-45deg) scale(0.96);
+            }
+
+            .falling-hearts .falling-heart:nth-of-type(3) {
+                animation-duration: 4.8s; /* 6s * 0.8 */
+                animation-delay: 1.6s; /* 2s * 0.8 */
+                transform: rotate(-45deg) scale(0.64);
+            }
+
+            .falling-hearts .falling-heart:nth-of-type(4) {
+                animation-duration: 7.2s; /* 9s * 0.8 */
+                animation-delay: 2.4s; /* 3s * 0.8 */
+                transform: rotate(-45deg) scale(0.88);
+            }
+
+            .falling-hearts .falling-heart:nth-of-type(5) {
+                animation-duration: 4s; /* 5s * 0.8 */
+                animation-delay: 3.2s; /* 4s * 0.8 */
+                transform: rotate(-45deg) scale(0.72);
+            }
+
+            .falling-hearts .falling-heart:nth-of-type(6) {
+                animation-duration: 6s; /* 7.5s * 0.8 */
+                animation-delay: 4s; /* 5s * 0.8 */
+                transform: rotate(-45deg) scale(1.04);
+            }
+
+            .falling-hearts .falling-heart:nth-of-type(7) {
+                animation-duration: 5.2s; /* 6.5s * 0.8 */
+                animation-delay: 4.8s; /* 6s * 0.8 */
+                transform: rotate(-45deg) scale(0.56);
+            }
+
+            .falling-hearts .falling-heart:nth-of-type(8) {
+                animation-duration: 6.8s; /* 8.5s * 0.8 */
+                animation-delay: 5.6s; /* 7s * 0.8 */
+                transform: rotate(-45deg) scale(0.8);
+            }
+
+            .falling-hearts .falling-heart:nth-of-type(9) {
+                animation-duration: 4.4s; /* 5.5s * 0.8 */
+                animation-delay: 6.4s; /* 8s * 0.8 */
+                transform: rotate(-45deg) scale(1.12);
+            }
+
+            .falling-hearts .falling-heart:nth-of-type(10) {
+                animation-duration: 7.6s; /* 9.5s * 0.8 */
+                animation-delay: 7.2s; /* 9s * 0.8 */
+                transform: rotate(-45deg) scale(0.68);
+            }
+
+            /* Wiederhole die Eigenschaften für die nächsten 10 Herzen */
+            .falling-hearts .falling-heart:nth-of-type(11) {
+                animation-duration: 4.96s; /* 6.2s * 0.8 */
+                animation-delay: 1.2s; /* 1.5s * 0.8 */
+                transform: rotate(-45deg) scale(0.88);
+            }
+
+            .falling-hearts .falling-heart:nth-of-type(12) {
+                animation-duration: 6.24s; /* 7.8s * 0.8 */
+                animation-delay: 2s; /* 2.5s * 0.8 */
+                transform: rotate(-45deg) scale(0.76);
+            }
+
+            .falling-hearts .falling-heart:nth-of-type(13) {
+                animation-duration: 4.24s; /* 5.3s * 0.8 */
+                animation-delay: 2.8s; /* 3.5s * 0.8 */
+                transform: rotate(-45deg) scale(0.8);
+            }
+
+            .falling-hearts .falling-heart:nth-of-type(14) {
+                animation-duration: 6.48s; /* 8.1s * 0.8 */
+                animation-delay: 3.6s; /* 4.5s * 0.8 */
+                transform: rotate(-45deg) scale(1.0);
+            }
+
+            .falling-hearts .falling-heart:nth-of-type(15) {
+                animation-duration: 5.36s; /* 6.7s * 0.8 */
+                animation-delay: 4.4s; /* 5.5s * 0.8 */
+                transform: rotate(-45deg) scale(0.68);
+            }
+
+            .falling-hearts .falling-heart:nth-of-type(16) {
+                animation-duration: 5.84s; /* 7.3s * 0.8 */
+                animation-delay: 5.2s; /* 6.5s * 0.8 */
+                transform: rotate(-45deg) scale(1.04);
+            }
+
+            .falling-hearts .falling-heart:nth-of-type(17) {
+                animation-duration: 4.64s; /* 5.8s * 0.8 */
+                animation-delay: 6s; /* 7.5s * 0.8 */
+                transform: rotate(-45deg) scale(0.72);
+            }
+
+            .falling-hearts .falling-heart:nth-of-type(18) {
+                animation-duration: 7.36s; /* 9.2s * 0.8 */
+                animation-delay: 6.8s; /* 8.5s * 0.8 */
+                transform: rotate(-45deg) scale(0.96);
+            }
+
+            .falling-hearts .falling-heart:nth-of-type(19) {
+                animation-duration: 5.52s; /* 6.9s * 0.8 */
+                animation-delay: 7.6s; /* 9.5s * 0.8 */
+                transform: rotate(-45deg) scale(0.64);
+            }
+
+            .falling-hearts .falling-heart:nth-of-type(20) {
+                animation-duration: 6.96s; /* 8.7s * 0.8 */
+                animation-delay: 8.4s; /* 10.5s * 0.8 */
+                transform: rotate(-45deg) scale(0.8);
+            }
+        </style>
+</head>
+<body>
+    <div class="heart-container">
+        <img src="Heart.svg" alt="Herz">
+        <div class="heart-text">J + L </div>
+    </div>
+
+    <!-- Container für fallende Herzen -->
+    <div class="falling-hearts">
+        <!-- Hier erstellen wir 20 fallende Herzen -->
+        <div class="falling-heart"></div>
+        <div class="falling-heart"></div>
+        <div class="falling-heart"></div>
+        <div class="falling-heart"></div>
+        <div class="falling-heart"></div>
+        <div class="falling-heart"></div>
+        <div class="falling-heart"></div>
+        <div class="falling-heart"></div>
+        <div class="falling-heart"></div>
+        <div class="falling-heart"></div>
+        <div class="falling-heart"></div>
+        <div class="falling-heart"></div>
+        <div class="falling-heart"></div>
+        <div class="falling-heart"></div>
+        <div class="falling-heart"></div>
+        <div class="falling-heart"></div>
+        <div class="falling-heart"></div>
+        <div class="falling-heart"></div>
+        <div class="falling-heart"></div>
+        <div class="falling-heart"></div>
+    </div>
+</body>
+</html>
